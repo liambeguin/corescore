@@ -807,7 +807,7 @@ targets:
     description: Microsemi Polarfire Evaluation Kit
     filesets: [rtl, polarfireeval]
     hooks:
-      post_run: [libero_post]
+      post_build: [libero_post]
     generate: [corescorecore_polarfireeval]
     tools:
       libero: &liberoMPF300
