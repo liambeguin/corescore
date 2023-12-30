@@ -328,6 +328,12 @@ filesets:
       - data/libero-post-instructions.txt:
           { file_type: user, copyto: post-instructions.txt }
 
+  polarfire_splashkit:
+    files:
+      - rtl/pf_clock_gen.v : {file_type : verilogSource}
+      - rtl/corescore_pf.v : {file_type : verilogSource}
+      - data/polarfire_splashkit.pdc : {file_type : PDC}
+
   go_board:
     files:
       - rtl/corescore_go_board.v: { file_type: verilogSource }
@@ -823,6 +829,18 @@ targets:
         <<: *liberoMPF300
         die: MPF300TS_ES
 
+  polarfire_splashkit:
+    default_tool: libero
+    description : Microsemi Polarfire Splash Kit
+    filesets: [rtl, polarfire_splashkit]
+    generate: [corescorecore_pf]
+    tools:
+      libero:
+        family : PolarFire
+        die : MPF300TS
+        package : FCG484
+    toplevel: corescorecore_pf
+
   go_board:
     default_tool: icestorm
     description: Nandland Go Board + Verilog emitter
@@ -1114,6 +1132,11 @@ generate:
     generator: corescorecore
     parameters:
       count: 882
+
+  corescorecore_pf:
+    generator: corescorecore
+    parameters:
+      count: 10
 
 generators:
   corescorecore:
