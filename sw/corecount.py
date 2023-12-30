@@ -1,3 +1,4 @@
+import argparse
 import curses
 import serial
 import sys
@@ -19,7 +20,10 @@ COREY = r'''
 
 
 def main(stdscr):
-    dev = sys.argv[1] if len(sys.argv) > 1 else '/dev/ttyUSB0'
+    parser = argparse.ArgumentParser('corecount')
+    parser.add_argument('--dev', default='/dev/ttyUSB0')
+    parser.add_argument('--baudrate', default=57600, type=int)
+    options = parser.parse_args()
 
     stdscr = curses.initscr()
     curses.curs_set(0)
@@ -38,7 +42,7 @@ def main(stdscr):
     win.refresh()
 
     found_cores = []
-    with serial.Serial(dev, 57600) as ser:
+    with serial.Serial(options.dev, options.baudrate) as ser:
         unpacker = msgpack.Unpacker(raw=False)
         while(True):
             buf = ser.read()

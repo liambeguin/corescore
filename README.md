@@ -40,4 +40,4 @@ Check out the [CoreScore World Ranking](https://corescore.store/)!
 
 7. Run the corecount utility (Might need to adjust for the correct UART port)
 
-       python3 fusesoc_libraries/corescore/sw/corecount.py /dev/ttyUSB0
+       python3 fusesoc_libraries/corescore/sw/corecount.py --dev /dev/ttyUSB0 --baudrate 57600
